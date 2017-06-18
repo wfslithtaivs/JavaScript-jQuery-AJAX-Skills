@@ -230,6 +230,7 @@
   "use strict";
   // put your code here
 
+  // generate and store secret number
   var secret_number = Math.floor(Math.random()*100) + 1;
 
   function f(evt){
@@ -240,6 +241,7 @@
     $("input#number-guessed").prop('disabled', false);
     $("div#number-guessing-msg").html("Guess the number");
 
+    // Listen to user input
     $("form#guessing-game-form").on("submit", function (evt) {
         evt.preventDefault();
 
@@ -262,7 +264,6 @@
     });
   }
 
-
   $("input#play-guessing-game").on("click", f);
 
 </script>
@@ -273,7 +274,6 @@
     How do you turn the string "42" into the integer 42 in JavaScript?
   </div>
 </div>
-
 
 
 <h2>AJAX!</h2>
@@ -291,7 +291,6 @@
 <p>
   With great power comes great responsibility. Go nuts.
 </p>
-
 
 
 <fieldset>
@@ -331,6 +330,21 @@
   }
 
   // put your code here
+
+  function f(evt) {
+    evt.preventDefault();
+    
+    var data = $("input#t-rex-target").val();
+
+    $.post("/t-rex-attack.json", 
+            {"attack-target" : data},
+            function (results) {
+              showTRexResults(results);}
+           );
+    }
+
+  $("form#t-rex-form").on("submit", f);
+
 
 </script>
 
