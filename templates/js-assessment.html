@@ -39,6 +39,12 @@
 <script>
   "use strict";
   // code here for above-problem
+  var target_button = document.getElementById("change-hello-to-goodbye-button");
+
+  target_button.addEventListener("click", function (){
+    document.getElementById("message-to-change").innerHTML = "goodbye";
+  }); 
+
 </script>
 
 <div class="hint">
@@ -67,6 +73,15 @@
 <script>
   "use strict";
   // code here for above problem
+
+  var target_form = document.getElementById("prevent-form-submission-form");
+
+  target_form.addEventListener("submit", function (evt) {
+      evt.preventDefault();
+
+      alert("Have a nice alert.");
+  })
+
 </script>
 
 <div class="hint">
@@ -91,15 +106,24 @@
 
 //  Here's a stub of a function you can use!
 
-//  function reverseString(evt) {
-//    var msg = "Porcupines are cute";
-//
-//    // do some stuff here to reverse that string into a new variable
-//    var newMsg = "This should be the reversed string";
-//
-//    alert(newMsg);
-//  }
+ function reverseString(evt) {
+   evt.preventDefault(); 
 
+   var msg = "Porcupines are cute";
+
+   // do some stuff here to reverse that string into a new variable
+   var newMsg = [];
+
+   for(var i = msg.length - 1; i >=0; i--) {
+      newMsg.push(msg[i]);
+   } 
+
+   alert(newMsg.join(''));
+ }
+
+ var target_button = document.getElementById("reverse-string-button");
+
+ target_button.addEventListener("click", reverseString);
 
 </script>
 
@@ -123,9 +147,26 @@
   // code here for above problem
   // if user enters 5, result will be 1 + 2 + 3 + 4 + 5 = 15
 
+  var target_form = document.getElementById("sum-to-n");  
+
+  function f(evt) {
+    evt.preventDefault();
+
+    var sum = 0;
+    var sum_to = parseInt(document.getElementById("sum-to-n-field").value);
+
+    for(var i = 0; i <= sum_to; i++) {
+      sum += i;
+    }
+
+    document.getElementById("sum-to-n-result").innerHTML = sum;
+  }
+
+  target_form.addEventListener("submit", f);
+
 </script>
 
-
+<script src="http://code.jquery.com/jquery.js"></script>
 
 <h2>jQuery</h2>
 <p>You should use jQuery for these parts.</p>
@@ -154,6 +195,10 @@
 <script>
   "use strict";
   // put your code here
+  $("img#kittenz-rule").dblclick(function () {
+    $("img#kittenz-rule").attr("src", "http://images4.fanpop.com/image/photos/16400000/Garfield-garfield-16403604-412-288.jpg");
+  });
+
 </script>
 
 <div class="hint">
@@ -161,7 +206,6 @@
     How do you change an attribute with jQuery?
   </div>
 </div>
-
 
 
 <h3>Number Guessing Game</h3>
@@ -185,6 +229,27 @@
 <script>
   "use strict";
   // put your code here
+
+  function f(evt){
+    evt.preventDefault();
+
+    $("input#play-guessing-game").prop('disabled', true);
+    $("input#try-this-number").prop('disabled', false);
+    $("input#number-guessed").prop('disabled', false);
+
+    $("div#number-guessing-msg").html("Guess the number");
+
+    $("form#guessing-game-form").on("submit", function () {
+
+    });
+
+    
+
+  }
+
+
+  $("input#play-guessing-game").on("click", f);
+
 </script>
 
 
