@@ -230,21 +230,36 @@
   "use strict";
   // put your code here
 
+  var secret_number = Math.floor(Math.random()*100) + 1;
+
   function f(evt){
     evt.preventDefault();
 
     $("input#play-guessing-game").prop('disabled', true);
     $("input#try-this-number").prop('disabled', false);
     $("input#number-guessed").prop('disabled', false);
-
     $("div#number-guessing-msg").html("Guess the number");
 
-    $("form#guessing-game-form").on("submit", function () {
+    $("form#guessing-game-form").on("submit", function (evt) {
+        evt.preventDefault();
 
+        var guess = parseInt($("input#number-guessed").val());
+
+        if (guess === secret_number) {
+          $("input#play-guessing-game").prop('disabled', false);
+          $("input#try-this-number").prop('disabled', true);
+          $("input#number-guessed").val('');
+          $("input#number-guessed").attr("placeholder", "");          
+          $("input#number-guessed").prop('disabled', true);
+          $("div#number-guessing-msg").html("Good job, baloonicorn! Would you like to play again?");
+        }
+        else if (guess > secret_number) {
+          $("div#number-guessing-msg").html("Too high!");
+        }
+        else if (guess < secret_number) {
+          $("div#number-guessing-msg").html("Too low!");
+        }
     });
-
-    
-
   }
 
 
